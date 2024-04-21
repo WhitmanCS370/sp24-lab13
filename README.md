@@ -37,6 +37,18 @@ Finally, note that Wilson didn't give us a way to run the new code from Chapter 
 Try running `undoable.py` and verify nothing happens.
 We'll address this in a later exercise.
 
+## Exercise 1: Forgetting moves
+
+Most editors do not save cursor movements in their undo history. 
+Modify the code in `undoable.py` so that undo ignores `Move` actions and only undoes changes to the content being edited.
+
+Before you modify the code, here is a test case you can add to `test_undoable.py`. It should initially fail.
+
+    def test_no_undo_movement():
+        for key in ["KEY_UP", "KEY_DOWN", "KEY_LEFT", "KEY_RIGHT"]:
+            app = make_fixture(["z", key, "UNDO"])
+            assert get_screen(app) == ["ab", "cd"]
+
 ## Exercise n: A real text editor
 
 Create a new main module `main.py`.  It should take the name of a file and open that file for editing using the `UndoableApp` class.
