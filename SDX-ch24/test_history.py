@@ -26,6 +26,7 @@ def test_history_after_delete():
     app = make_fixture(["KEY_RIGHT", "DELETE"])
     assert app.get_history() == [("delete", (0, 1), "b")]
     assert get_screen(app) == ["a_", "cd"]
+
 ### Test runner
 import time
 

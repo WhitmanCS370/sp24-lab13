@@ -23,6 +23,7 @@ def test_immediate_insert():
 def test_move_and_delete():
     app = make_fixture(["KEY_RIGHT", "DELETE"])
     assert get_screen(app) == ["a_", "cd"]
+
 ### Test runner
 import time
 

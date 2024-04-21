@@ -33,6 +33,7 @@ def test_scroll_down():
     app(screen)
     assert app.get_log()[-1] == ("CONTROL_X", (2, 0), ["de", "gh"])
 # [/example]
+
 ### Test runner
 import time
 

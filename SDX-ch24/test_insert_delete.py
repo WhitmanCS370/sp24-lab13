@@ -38,6 +38,7 @@ def test_delete_when_impossible():
     except AssertionError:
         pass
 # [/empty]
+
 ### Test runner
 import time
 
