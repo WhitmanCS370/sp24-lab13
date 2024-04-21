@@ -49,6 +49,23 @@ Before you modify the code, here is a test case you can add to `test_undoable.py
             app = make_fixture(["z", key, "UNDO"])
             assert get_screen(app) == ["ab", "cd"]
 
+## Exercise 2: Line breaks
+
+Modify the code in `action.py` and `buffer.py` so that pressing the Enter key inserts a new line or breaks the current line in two.
+What information do you have to store to make this operation undoable?
+
+Here is a test case to add to `test_action.py`:
+
+    def test_enter():
+        app = make_fixture(["KEY_RIGHT", "ENTER"])
+        assert get_screen(app) == ["a_","b_"]
+
+And here is a test case to add to `test_undoable.py`:
+
+    def test_enter_undo():
+        app = make_fixture(["KEY_RIGHT", "ENTER", "UNDO"])
+        assert get_screen(app) == ["ab","cd"]
+
 ## Exercise n: A real text editor
 
 Create a new main module `main.py`.  It should take the name of a file and open that file for editing using the `UndoableApp` class.
