@@ -4,7 +4,7 @@ Materials for week 13 lab in CS-370, which includes Ch. 24 "Undo and Redo" adapt
 _April 23, 2024_
 
 Organization:
-* SDX-ch24: The code files for the _SDX Ch. 24_ activity (as downloaded directly from the book website, unmodified) 
+* SDX-ch24: The code files for the _SDX Ch. 24_ activity, as downloaded from the book website. The test scripts have been modified to include the test runner from chapter 6.
 
 ## Team Members for Part 1
 Enter your names here
