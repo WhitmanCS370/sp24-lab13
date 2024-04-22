@@ -78,4 +78,6 @@ To run the app with a real screen in the terminal, you will need to make the `In
 Do this now and resolve any resulting errors. Note you will no longer be able to run the automated tests that use headless mode.
 
 Using your knowledge of design principles and patterns, propose a different approach for introducing headless mode
-that would allow you to both use the app and run automated tests.
+that would allow you to both use the app and run automated tests. What's your solution?
+
+What else do you need to do to make this text editor work "IRL"? 
