@@ -80,4 +80,4 @@ Do this now and resolve any resulting errors. Note you will no longer be able to
 Using your knowledge of design principles and patterns, propose a different approach for introducing headless mode
 that would allow you to both use the app and run automated tests. What's your solution?
 
-What else do you need to do to make this text editor work "IRL"? 
+What else do you need to do to make this text editor work as a useful interactive application? 
