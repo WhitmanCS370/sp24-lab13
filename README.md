@@ -40,7 +40,7 @@ We'll address this in a later exercise.
 ## Exercise 1: Forgetting moves
 
 Most editors do not save cursor movements in their undo history. 
-Modify the code in `undoable.py` so that undo ignores `Move` actions and only undoes changes to the content being edited.
+Modify the code in `action.py` so that movement operations are not saved.
 
 Before you modify the code, here is a test case you can add to `test_undoable.py`. It should initially fail.
 
@@ -66,14 +66,16 @@ And here is a test case to add to `test_undoable.py`:
         app = make_fixture(["KEY_RIGHT", "ENTER", "UNDO"])
         assert get_screen(app) == ["ab","cd"]
 
-## Exercise n: A real text editor
+## Exercise 3: Redoing operations
+
+Implement a “redo” command that re-executes an operation that has been undone. How does redo differ from undoing an undo? Does it make sense to redo an action that wasn’t done?
+
+## Exercise 4: A real text editor
 
 Create a new main module `main.py`.  It should take the name of a file and open that file for editing using the `UndoableApp` class.
 
 To run the app with a real screen in the terminal, you will need to make the `InsertDeleteApp` class inherit from `App` instead of `HeadlessApp`.
-Do this now and resolve any resulting bugs. Note you will no longer be able to run the automated tests that use headless mode.
-
-Then, add a handler for CTRL-S to save the file.
+Do this now and resolve any resulting errors. Note you will no longer be able to run the automated tests that use headless mode.
 
 Using your knowledge of design principles and patterns, propose a different approach for introducing headless mode
 that would allow you to both use the app and run automated tests.
