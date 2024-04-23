@@ -27,9 +27,22 @@ class Insert(Action):
         self._char = char
 
     def do(self):
+        # if self._char == '\n':  
+        #     row, col = self._pos
+        #     line = self._app._buffer.lines()[row]
+        #     self._app._buffer.insert((row, col), '\n')
+        #     self._app._cursor.move_to((row + 1, 0))
+        # else:
         self._app._buffer.insert(self._pos, self._char)
 
     def undo(self):
+        # if self._char == '\n':  
+        #     row, col = self._pos
+        #     line = self._app._buffer.lines()[row]
+        #     self._app._buffer.insert((row, col), line[col:])
+        #     self._app._buffer._lines[row + 1] = self._app._buffer._lines[row + 1][1:]
+        #     self._app._cursor.move_to(self._pos)
+        # else:
         self._app._buffer.delete(self._pos)
 # [/Insert]
 
@@ -69,6 +82,9 @@ class Move(Action):
 
     def undo(self):
         self._app._cursor.move_to(self._old)
+
+    def save(self):
+        return False
 # [/Move]
 
     def __str__(self):
@@ -107,12 +123,15 @@ class ActionApp(InsertDeleteApp):
         if not hasattr(self, name):
             return
         action = getattr(self, name)(key)
+        # if isinstance(action, Move):
+        #     return
         self._history.append(action)
         action.do()
         self._add_log(key)
     # [/interact]
 
     def _add_log(self, key):
+        # if key not in ["KEY_UP", "KEY_DOWN", "KEY_LEFT", "KEY_RIGHT"]:
         self._log.append((key, self._cursor.pos(), self._screen.display()))
 
     # [actions]
@@ -137,3 +156,4 @@ class ActionApp(InsertDeleteApp):
 
     def _do_CONTROL_X(self, key):
         return Exit(self)
+
