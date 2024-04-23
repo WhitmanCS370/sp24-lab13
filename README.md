@@ -11,8 +11,8 @@ Enter your names here
 
 ## Team Roles for Part 1
 Who will start out as
-* DRIVER: Driver's name
-* NAVIGATOR: Navigator's name
+* DRIVER: Terence 
+* NAVIGATOR: Zurrain
 
 You will switch halfway through this activity.
 
@@ -21,7 +21,10 @@ You will switch halfway through this activity.
 Write your answers to the questions below.
 
 * What were the main ideas from SDX chapter 24?
+- I think the main idea in this chapter is using objects to simulate keyboard strokes, record file history and enable undo.
+
 * What questions did you have about the material in the chapters? What did you find confusing?
+- We both vaguely understand the chapter and agree that the lack of a visual of the actual program running makes it a bit harder to undertsand and follow along. 
 
 ## Exercise 0: Run the code
 
@@ -49,8 +52,11 @@ Before you modify the code, here is a test case you can add to `test_undoable.py
             app = make_fixture(["z", key, "UNDO"])
             assert get_screen(app) == ["ab", "cd"]
 
-How did you approach this exercise? 
-Considering the advice of Ousterhout and others, what do you think about the abstractions that Wilson chose?
+**How did you approach this exercise?**
+- At first we tried to modify _interact by preventing move actions to be   added to histroy however that did not work so we tried to prevent the movement keys to be logged in _add_log which also didn't work and finally we added a method save in Move which returns False. This worked becuase now all the move actions were being ignored.
+  
+**Considering the advice of Ousterhout and others, what do you think about the abstractions that Wilson chose?**
+- The abstractions are a bit hard to figure out because there are too many classes which means multiple interfaces to try and remember which causes cognitive overload. 
 
 ## Exercise 2: Line breaks
 
@@ -70,8 +76,9 @@ And here is a test case to add to `test_undoable.py`:
         assert get_screen(app) == ["ab","cd"]
 
 
-How did you approach this exercise? 
-Considering the advice of Ousterhout and others, what do you think about the abstractions that Wilson chose?
+**How did you approach this exercise?**
+We tried to modify Insert methods undo and do to account for the "\n" character but that failed, we then tried to modify the insert method in buffer using the same approach and that too did pass the tests. We could not get our code to pass within the allocated time. 
+**Considering the advice of Ousterhout and others, what do you think about the abstractions that Wilson chose?**
 
 ## Exercise 3: Redoing operations
 
