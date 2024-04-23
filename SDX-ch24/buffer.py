@@ -20,6 +20,7 @@ class Buffer:
         assert 0 <= pos[COL] < len(self._lines[ROW])
         return self._lines[pos[ROW]][pos[COL]]
 
+
     def set_height(self, height):
         self._height = height
 
