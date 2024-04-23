@@ -87,7 +87,7 @@ class Exit(Action):
 
 
 class ActionApp(InsertDeleteApp):
-    INSERTABLE = set(string.ascii_letters + string.digits)
+    INSERTABLE = set(string.ascii_letters + string.digits + '\n')
 
     def __init__(self, size, keystrokes):
         super().__init__(size, keystrokes)
@@ -131,6 +131,9 @@ class ActionApp(InsertDeleteApp):
 
     def _do_KEY_UP(self, key):
         return Move(self, "up")
+    
+    def _do_KEY_ENTER(self):
+        return Insert(self, self._cursor.pos(), '\n')
     # [/actions]
 
     def _do_KEY_DOWN(self, key):
