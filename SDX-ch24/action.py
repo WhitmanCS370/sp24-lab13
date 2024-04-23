@@ -87,7 +87,7 @@ class Exit(Action):
 
 
 class ActionApp(InsertDeleteApp):
-    INSERTABLE = set(string.ascii_letters + string.digits + '\n')
+    INSERTABLE = set(string.ascii_letters + string.digits + 'ENTER')
 
     def __init__(self, size, keystrokes):
         super().__init__(size, keystrokes)
@@ -111,9 +111,6 @@ class ActionApp(InsertDeleteApp):
             if not hasattr(self, name):
                 return
             action = getattr(self, name)(key)
-            print(action, file=f)
-            print(name, file=f)
-            # if not isinstance(action, Move):
             self._history.append(action)
             action.do()
             self._add_log(key)
