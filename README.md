@@ -11,8 +11,8 @@ Enter your names here
 
 ## Team Roles for Part 1
 Who will start out as
-* DRIVER: Driver's name
-* NAVIGATOR: Navigator's name
+* DRIVER: Shahrom Dehoti
+* NAVIGATOR: Gabe Paris-Moe
 
 You will switch halfway through this activity.
 
@@ -21,7 +21,9 @@ You will switch halfway through this activity.
 Write your answers to the questions below.
 
 * What were the main ideas from SDX chapter 24?
+* Chapter 24 builds on file viewer from chapter 23 but then adds some other features such as add and delete text, as well as undo.
 * What questions did you have about the material in the chapters? What did you find confusing?
+Everything is pretty familiar just because Chapter 23 was easy to interpret and this Chapter is building on that idea.
 
 ## Exercise 0: Run the code
 
@@ -37,6 +39,8 @@ Finally, note that Wilson didn't give us a way to run the new code from Chapter 
 Try running `undoable.py` and verify nothing happens.
 We'll address this in a later exercise.
 
+Done!
+
 ## Exercise 1: Forgetting moves
 
 Most editors do not save cursor movements in their undo history. 
@@ -49,8 +53,10 @@ Before you modify the code, here is a test case you can add to `test_undoable.py
             app = make_fixture(["z", key, "UNDO"])
             assert get_screen(app) == ["ab", "cd"]
 
-How did you approach this exercise? 
+How did you approach this exercise?
+We were first trying to understand the code that we were working with. Afterwards, we added the test case to the test_undoable.py and ran the test file again. Then, we made changes in the action.py file in the _interact function where we added a ling which says if an action is not an instance of the Move, then save it, otherwise not.
 Considering the advice of Ousterhout and others, what do you think about the abstractions that Wilson chose?
+
 
 ## Exercise 2: Line breaks
 
