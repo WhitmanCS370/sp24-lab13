@@ -39,6 +39,8 @@ Next, verify that you can run the base appl1ication from Chapter 23:
 
     python3 app.py 20
 
+note: the code crashes if n(umber of columns) is greater than the width of the terminal window
+
 Use CTRL-X to quit.
 
 Finally, note that Wilson didn't give us a way to run the new code from Chapter 24 as an interactive text editor.
@@ -58,7 +60,12 @@ Before you modify the code, here is a test case you can add to `test_undoable.py
             assert get_screen(app) == ["ab", "cd"]
 
 How did you approach this exercise? 
+
+We initially tried to add a conditional in the _interact method to detect and exclude move actions, but then we realized that the child UndoableApp checks to save only when the action.save() is true. So we wrote an overload for save() in the Move class.
+
 Considering the advice of Ousterhout and others, what do you think about the abstractions that Wilson chose?
+
+I think Ousterhout would be disappointed in the number of small, inherited classes in this program. It makes the code significantly harder to read.
 
 ## Exercise 2: Line breaks
 

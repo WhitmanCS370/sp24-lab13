@@ -69,6 +69,9 @@ class Move(Action):
 
     def undo(self):
         self._app._cursor.move_to(self._old)
+
+    def save(self):
+        return False
 # [/Move]
 
     def __str__(self):
@@ -102,14 +105,18 @@ class ActionApp(InsertDeleteApp):
 
     # [interact]
     def _interact(self):
-        family, key = self._get_key()
-        name = f"_do_{family}" if family else f"_do_{key}"
-        if not hasattr(self, name):
-            return
-        action = getattr(self, name)(key)
-        self._history.append(action)
-        action.do()
-        self._add_log(key)
+        with open("logfile.txt", "w") as f:
+            family, key = self._get_key()
+            name = f"_do_{family}" if family else f"_do_{key}"
+            if not hasattr(self, name):
+                return
+            action = getattr(self, name)(key)
+            print(action, file=f)
+            print(name, file=f)
+            # if not isinstance(action, Move):
+            self._history.append(action)
+            action.do()
+            self._add_log(key)
     # [/interact]
 
     def _add_log(self, key):
