@@ -69,6 +69,9 @@ class Move(Action):
 
     def undo(self):
         self._app._cursor.move_to(self._old)
+    
+    def save(self):
+        return False
 # [/Move]
 
     def __str__(self):
