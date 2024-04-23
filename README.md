@@ -53,7 +53,10 @@ Before you modify the code, here is a test case you can add to `test_undoable.py
             assert get_screen(app) == ["ab", "cd"]
 
 How did you approach this exercise? 
+We read through all methods and attempted to understand what each one is suppose to do.
+
 Considering the advice of Ousterhout and others, what do you think about the abstractions that Wilson chose?
+It's too complicated for us.
 
 ## Exercise 2: Line breaks
 
@@ -74,7 +77,10 @@ And here is a test case to add to `test_undoable.py`:
 
 
 How did you approach this exercise? 
+We looked at the methods again and picked out the one to extend to accommodate these changes. Additionally, we thought to add two methods to match the other methods in buffer.py.
+
 Considering the advice of Ousterhout and others, what do you think about the abstractions that Wilson chose?
+We found them hard to understand again.
 
 ## Exercise 3: Redoing operations
 
