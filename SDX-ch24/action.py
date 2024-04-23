@@ -64,11 +64,17 @@ class Move(Action):
         self._new = None
 
     def do(self):
+        print("doing movement")
         self._app._cursor.act(self._direction)
         self._new = self._app._cursor.pos()
+    
+    def save(self):
+        return False
 
     def undo(self):
-        self._app._cursor.move_to(self._old)
+        print("Trying to undo movement, something wrong?")
+        return
+        # self._app._cursor.move_to(self._old)
 # [/Move]
 
     def __str__(self):
@@ -107,10 +113,15 @@ class ActionApp(InsertDeleteApp):
         if not hasattr(self, name):
             return
         action = getattr(self, name)(key)
-        self._history.append(action)
         action.do()
-        self._add_log(key)
-    # [/interact]
+        print(key)  # verbose for testing
+        if key not in ["KEY_UP", "KEY_DOWN", "KEY_LEFT", "KEY_RIGHT"]:
+            print("key not cursor, adding to history")
+            self._history.append(action)
+            self._add_log(key)
+        else:
+            print("cursor movement, not adding to history")
+
 
     def _add_log(self, key):
         self._log.append((key, self._cursor.pos(), self._screen.display()))

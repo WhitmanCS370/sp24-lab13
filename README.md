@@ -7,12 +7,13 @@ Organization:
 * SDX-ch24: The code files for the _SDX Ch. 24_ activity, as downloaded from the book website. The test scripts have been modified to include the test runner from chapter 6.
 
 ## Team Members for Part 1
-Enter your names here
+Steven Lin
+Neel Troeger
 
 ## Team Roles for Part 1
 Who will start out as
-* DRIVER: Driver's name
-* NAVIGATOR: Navigator's name
+* DRIVER: Steven
+* NAVIGATOR: Neel
 
 You will switch halfway through this activity.
 
@@ -21,6 +22,9 @@ You will switch halfway through this activity.
 Write your answers to the questions below.
 
 * What were the main ideas from SDX chapter 24?
+
+Recording actions so they can be undone.
+
 * What questions did you have about the material in the chapters? What did you find confusing?
 
 ## Exercise 0: Run the code
@@ -72,6 +76,9 @@ And here is a test case to add to `test_undoable.py`:
 
 How did you approach this exercise? 
 Considering the advice of Ousterhout and others, what do you think about the abstractions that Wilson chose?
+
+Tried to make changes to both sides of the control flow through _interact() and undo(), neither of which worked.
+Only discovered the save() variable after the fact
 
 ## Exercise 3: Redoing operations
 
