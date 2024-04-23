@@ -11,8 +11,8 @@ Enter your names here
 
 ## Team Roles for Part 1
 Who will start out as
-* DRIVER: Driver's name
-* NAVIGATOR: Navigator's name
+* DRIVER: Luke Samuels
+* NAVIGATOR: Jack Allard
 
 You will switch halfway through this activity.
 
@@ -21,15 +21,25 @@ You will switch halfway through this activity.
 Write your answers to the questions below.
 
 * What were the main ideas from SDX chapter 24?
+1. Insertion/Deletion can be implemented with the command pattern
+2. Undo/Redo can be represented as a stack of insertion/deletion/cursor move objects that can be parsed through
+
 * What questions did you have about the material in the chapters? What did you find confusing?
+
+1. This approach, where each keystroke creates an object to put in a dynamically allocated vector, seems like
+the most possibly inefficient way to do it. I understand that this is a small project and optimization is not
+a worry, but it seems highly unlikely for this to be representative of any real undo/redo system. Or am I thinking
+of it wrong?
 
 ## Exercise 0: Run the code
 
 First, verify that you can run the test scripts, and that all tests pass.
 
-Next, verify that you can run the base application from Chapter 23:
+Next, verify that you can run the base appl1ication from Chapter 23:
 
     python3 app.py 20
+
+note: the code crashes if n(umber of columns) is greater than the width of the terminal window
 
 Use CTRL-X to quit.
 
@@ -50,7 +60,12 @@ Before you modify the code, here is a test case you can add to `test_undoable.py
             assert get_screen(app) == ["ab", "cd"]
 
 How did you approach this exercise? 
+
+We initially tried to add a conditional in the _interact method to detect and exclude move actions, but then we realized that the child UndoableApp checks to save only when the action.save() is true. So we wrote an overload for save() in the Move class.
+
 Considering the advice of Ousterhout and others, what do you think about the abstractions that Wilson chose?
+
+I think Ousterhout would be disappointed in the number of small, inherited classes in this program. It makes the code significantly harder to read.
 
 ## Exercise 2: Line breaks
 
