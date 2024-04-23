@@ -68,6 +68,14 @@ class Move(Action):
         self._new = self._app._cursor.pos()
 
     def undo(self):
+        """
+        opposite_direction = {
+            "up": "down",
+            "down": "up",
+            "left": "right",
+            "right": "left"
+        }
+        """
         self._app._cursor.move_to(self._old)
 # [/Move]
 
@@ -107,7 +115,8 @@ class ActionApp(InsertDeleteApp):
         if not hasattr(self, name):
             return
         action = getattr(self, name)(key)
-        self._history.append(action)
+        if not isinstance(action, Move):  
+            self._history.append(action)
         action.do()
         self._add_log(key)
     # [/interact]
