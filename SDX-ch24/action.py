@@ -107,7 +107,8 @@ class ActionApp(InsertDeleteApp):
         if not hasattr(self, name):
             return
         action = getattr(self, name)(key)
-        self._history.append(action)
+        if not isinstance(action, Move):
+            self._history.append(action)
         action.do()
         self._add_log(key)
     # [/interact]
