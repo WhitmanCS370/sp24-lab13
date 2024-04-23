@@ -68,7 +68,11 @@ class Move(Action):
         self._new = self._app._cursor.pos()
 
     def undo(self):
+        print(self._direction)
         self._app._cursor.move_to(self._old)
+
+    def save(self):
+        return False
 # [/Move]
 
     def __str__(self):
@@ -94,6 +98,8 @@ class ActionApp(InsertDeleteApp):
         return self._history
 
     def _get_key(self):
+        """ app = make_fixture(["z", key, "UNDO"]) parameter passed from make_fixture from undoable
+        """
         key = self._screen.getkey()
         if key in self.INSERTABLE:
             return "INSERT", key
@@ -121,6 +127,9 @@ class ActionApp(InsertDeleteApp):
 
     def _do_INSERT(self, key):
         return Insert(self, self._cursor.pos(), key)
+    
+    def _do_ENTER(self, key):
+        return Insert(self, self._cursor.pos(), "_")
 
     def _do_KEY_UP(self, key):
         return Move(self, "up")
