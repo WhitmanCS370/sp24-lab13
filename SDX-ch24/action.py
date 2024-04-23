@@ -69,6 +69,9 @@ class Move(Action):
 
     def undo(self):
         self._app._cursor.move_to(self._old)
+
+    def save(self):
+        return False
 # [/Move]
 
     def __str__(self):
@@ -82,6 +85,22 @@ class Exit(Action):
     def __str__(self):
         return f"Exit()"
 
+# [NewLine]
+class NewLine(Action):
+    def __init__(self, app, pos):
+        super().__init__(app)
+        self._pos = pos
+
+    def do(self):
+        self._app._buffer.newline(self._pos)
+
+    def undo(self):
+        self._app._buffer.undoNewline(self._pos)
+# [/NewLine]
+
+    def __str__(self):
+        return f"NewLine({self._pos}, '{self._char}')"
+
 
 class ActionApp(InsertDeleteApp):
     INSERTABLE = set(string.ascii_letters + string.digits)
@@ -89,6 +108,7 @@ class ActionApp(InsertDeleteApp):
     def __init__(self, size, keystrokes):
         super().__init__(size, keystrokes)
         self._history = []
+        self._undoHistory = []
 
     def get_history(self):
         return self._history
@@ -137,3 +157,7 @@ class ActionApp(InsertDeleteApp):
 
     def _do_CONTROL_X(self, key):
         return Exit(self)
+
+    def _do_ENTER(self, key):
+        return NewLine(self, self._cursor.pos())
+

@@ -13,6 +13,18 @@ class InsertDeleteBuffer(Buffer):
         line = line[:pos[COL]] + char + line[pos[COL]:]
         self._lines[pos[ROW]] = line
 
+    def newline(self, pos):
+        assert 0 <= pos[ROW] < self.nrow()
+        assert 0 <= pos[COL] <= self.ncol(pos[ROW])
+        new_line = self._lines[pos[ROW]][pos[COL]:]
+        self._lines[pos[ROW]] = self._lines[pos[ROW]][:pos[COL]]
+        self._lines.insert(pos[ROW] + 1, new_line)
+
+    def undoNewline(self, pos):
+        assert 0 <= pos[ROW] < self.nrow()
+        assert 0 <= pos[COL] <= self.ncol(pos[ROW])
+        self._lines[pos[ROW]] += self._lines.pop(pos[ROW] + 1)
+
     def delete(self, pos):
         assert 0 <= pos[ROW] < self.nrow()
         assert 0 <= pos[COL] < self.ncol(pos[ROW])
