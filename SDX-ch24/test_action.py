@@ -24,6 +24,10 @@ def test_move_and_delete():
     app = make_fixture(["KEY_RIGHT", "DELETE"])
     assert get_screen(app) == ["a_", "cd"]
 
+def test_enter():
+    app = make_fixture(["KEY_RIGHT", "ENTER"])
+    assert get_screen(app) == ["a_","b_"]
+
 ### Test runner
 import time
 
