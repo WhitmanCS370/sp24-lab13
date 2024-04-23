@@ -7,12 +7,12 @@ Organization:
 * SDX-ch24: The code files for the _SDX Ch. 24_ activity, as downloaded from the book website. The test scripts have been modified to include the test runner from chapter 6.
 
 ## Team Members for Part 1
-Enter your names here
+Andrew Tate and John Leeds
 
 ## Team Roles for Part 1
 Who will start out as
-* DRIVER: Driver's name
-* NAVIGATOR: Navigator's name
+* DRIVER: John Leeds
+* NAVIGATOR: Andrew Tate
 
 You will switch halfway through this activity.
 
@@ -21,7 +21,14 @@ You will switch halfway through this activity.
 Write your answers to the questions below.
 
 * What were the main ideas from SDX chapter 24?
+    * Mock objects 
+    * Use objects to represent actions to record history and enable undo
+    * Recording state is easier but more expensive than recording changes
+    * Headless app
+    * Insertion and Deletion: Generic?
 * What questions did you have about the material in the chapters? What did you find confusing?
+    * Summary
+    * There's so many classes.  Classitis.
 
 ## Exercise 0: Run the code
 
@@ -35,6 +42,9 @@ Use CTRL-X to quit.
 
 Finally, note that Wilson didn't give us a way to run the new code from Chapter 24 as an interactive text editor.
 Try running `undoable.py` and verify nothing happens.
+
+Consider it **verified!** ✅
+
 We'll address this in a later exercise.
 
 ## Exercise 1: Forgetting moves
@@ -50,7 +60,12 @@ Before you modify the code, here is a test case you can add to `test_undoable.py
             assert get_screen(app) == ["ab", "cd"]
 
 How did you approach this exercise? 
+
+We changed the save function to return `False` in the `Move` class in `action.py`.
+
 Considering the advice of Ousterhout and others, what do you think about the abstractions that Wilson chose?
+
+We like the abstractions and the use of the `Action` abstract base class.
 
 ## Exercise 2: Line breaks
 
@@ -71,7 +86,13 @@ And here is a test case to add to `test_undoable.py`:
 
 
 How did you approach this exercise? 
+
+We added the functions `newline` and `undoNewline` to the `InsertDeleteBuffer` class.
+If we were following the previous style, we maybe should have created a `NewlineBuffer` class.
+
 Considering the advice of Ousterhout and others, what do you think about the abstractions that Wilson chose?
+
+Neutral.
 
 ## Exercise 3: Redoing operations
 
@@ -84,6 +105,11 @@ Here's an example test case:
         assert get_screen(app) == ["az","cd"]
 
 How did you approach this exercise? 
+
+We were thinking that you could create an undoHistory stack and move stuff from the history stack to that stack.
+Then, when you call redo, you could try and pop from that stack.
+Alternatively, if you make an action without redoing, the redo stack will be cleared.
+
 Considering the advice of Ousterhout and others, what do you think about the abstractions that Wilson chose?
 
 ## Exercise 4: A real text editor
