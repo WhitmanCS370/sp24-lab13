@@ -53,7 +53,8 @@ Before you modify the code, here is a test case you can add to `test_undoable.py
             assert get_screen(app) == ["ab", "cd"]
 
 **How did you approach this exercise?**
-- At first we tried to modify _interact by preventing move actions to be   added to histroy however that did not work so we tried to prevent the movement keys to be logged in _add_log which also didn't work and finally we added a method save in Move which returns False. This worked becuase now all the move actions were being ignored. 
+- At first we tried to modify _interact by preventing move actions to be   added to histroy however that did not work so we tried to prevent the movement keys to be logged in _add_log which also didn't work and finally we added a method save in Move which returns False. This worked becuase now all the move actions were being ignored.
+  
 **Considering the advice of Ousterhout and others, what do you think about the abstractions that Wilson chose?**
 - The abstractions are a bit hard to figure out because there are too many classes which means multiple interfaces to try and remember which causes cognitive overload. 
 
