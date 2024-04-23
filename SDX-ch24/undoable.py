@@ -33,4 +33,16 @@ class UndoableApp(ActionApp):
         if action.save():
             self._history.append(action)
         self._add_log(key)
+
+        """ Supersedes from ActionApp
+        def _interact(self):
+        family, key = self._get_key()
+        name = f"_do_{family}" if family else f"_do_{key}"
+        if not hasattr(self, name):
+            return
+        action = getattr(self, name)(key)
+        self._history.append(action)
+        action.do()
+        self._add_log(key)
+        """
 # [/app]

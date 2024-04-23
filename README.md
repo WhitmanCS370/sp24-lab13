@@ -7,12 +7,12 @@ Organization:
 * SDX-ch24: The code files for the _SDX Ch. 24_ activity, as downloaded from the book website. The test scripts have been modified to include the test runner from chapter 6.
 
 ## Team Members for Part 1
-Enter your names here
+Sam, Jack, Coden
 
 ## Team Roles for Part 1
 Who will start out as
-* DRIVER: Driver's name
-* NAVIGATOR: Navigator's name
+* DRIVER: Sam
+* NAVIGATOR: Coden, Steven
 
 You will switch halfway through this activity.
 
@@ -21,7 +21,10 @@ You will switch halfway through this activity.
 Write your answers to the questions below.
 
 * What were the main ideas from SDX chapter 24?
+This takes the previous window, cursor, app program from our last chapter, and expands on it by adding action classes that have the capacity to keep track of their state allowing for undos and redos
+
 * What questions did you have about the material in the chapters? What did you find confusing?
+How steps does undo go back for a chain of actions
 
 ## Exercise 0: Run the code
 
@@ -49,8 +52,14 @@ Before you modify the code, here is a test case you can add to `test_undoable.py
             app = make_fixture(["z", key, "UNDO"])
             assert get_screen(app) == ["ab", "cd"]
 
-How did you approach this exercise? 
+How did you approach this exercise?
+When we added this test to the test file, the test initially threw an error. Commenting out the undo method in action gave us a fail. Trying to traverse the chain of calls, we assume that _interact is being called somewhere since we supply dummy key input to the headless undoable application.
+
+Update: We added a polymorphic example of the save method to all move objects, setting the the return value to false. Anything that tries to use the Move object uses a False save value, while other Action objects still have this true save value
+
+
 Considering the advice of Ousterhout and others, what do you think about the abstractions that Wilson chose?
+The inheritance is terrible. There are lots of pass through methods and examples of polymorphism with very slight changes that makes navigating files a nightmare. 
 
 ## Exercise 2: Line breaks
 

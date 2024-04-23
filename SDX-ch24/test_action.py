@@ -10,6 +10,7 @@ def make_fixture(keys, size=(2, 2), lines=LINES):
     return app
 
 def get_screen(app):
+    print(app.get_log())
     return app.get_log()[-1][-1]
 
 def test_no_action():
@@ -23,6 +24,13 @@ def test_immediate_insert():
 def test_move_and_delete():
     app = make_fixture(["KEY_RIGHT", "DELETE"])
     assert get_screen(app) == ["a_", "cd"]
+
+def test_enter():
+    """ Inserting _ as a new line character doesn't move 'b' over, but it removes it completely.
+    """
+    app = make_fixture(["KEY_RIGHT", "ENTER"])
+    print(get_screen(app))
+    assert get_screen(app) == ["a_","b_"]
 
 ### Test runner
 import time
