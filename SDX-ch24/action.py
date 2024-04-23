@@ -69,11 +69,13 @@ class Move(Action):
 
     def undo(self):
         self._app._cursor.move_to(self._old)
+
+    def save(self):
+        return False
 # [/Move]
 
     def __str__(self):
         return f"Move('{self._direction}', {self._old}, {self._new})"
-
 
 class Exit(Action):
     def do(self):
@@ -99,6 +101,19 @@ class ActionApp(InsertDeleteApp):
             return "INSERT", key
         else:
             return None, key
+        
+class Undo(Action):
+    def do(self):
+        action = self._app._history.pop()
+        action.undo()
+
+    def save(self):
+        return False
+
+    def __str__(self):
+        return f"Undo({self._app._history[-1]})"
+# [/Undo]
+
 
     # [interact]
     def _interact(self):
@@ -106,10 +121,14 @@ class ActionApp(InsertDeleteApp):
         name = f"_do_{family}" if family else f"_do_{key}"
         if not hasattr(self, name):
             return
-        action = getattr(self, name)(key)
-        self._history.append(action)
-        action.do()
-        self._add_log(key)
+        if key not in ["KEY_UP", "KEY_DOWN", "KEY_LEFT", "KEY_RIGHT"]:
+            action = getattr(self, name)(key)
+            self._history.append(action)
+            action.do()
+            self._add_log(key)
+        
+        
+        
     # [/interact]
 
     def _add_log(self, key):
@@ -118,6 +137,8 @@ class ActionApp(InsertDeleteApp):
     # [actions]
     def _do_DELETE(self, key):
         return Delete(self, self._cursor.pos())
+    
+
 
     def _do_INSERT(self, key):
         return Insert(self, self._cursor.pos(), key)
