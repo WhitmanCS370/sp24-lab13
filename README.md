@@ -11,8 +11,8 @@ Enter your names here
 
 ## Team Roles for Part 1
 Who will start out as
-* DRIVER: Driver's name
-* NAVIGATOR: Navigator's name
+* DRIVER: Rhys
+* NAVIGATOR: Aidan
 
 You will switch halfway through this activity.
 
@@ -21,7 +21,10 @@ You will switch halfway through this activity.
 Write your answers to the questions below.
 
 * What were the main ideas from SDX chapter 24?
+Implimenting complex testing for handler interaction. They use mock objects to simplify testing. This chapter also impliments tracking actions/states to reverse them. They did this by using objects to represent actions.
+
 * What questions did you have about the material in the chapters? What did you find confusing?
+We had a hard time understanding a headless application. I guess we were mostly confused about how you would be sure about the results when there is no GUI. How would you know if the test are complete? Do you use this to supplement/record the tests?
 
 ## Exercise 0: Run the code
 
@@ -32,6 +35,8 @@ Next, verify that you can run the base application from Chapter 23:
     python3 app.py 20
 
 Use CTRL-X to quit.
+
+Ok. Originally, this did not run and gave us "ModuleNotFoundError: No module named '_curses'" None of us understand how this work, but we fixed this by installing "windows-_curses". John thought that this would probably be malware, but it works. We were very surprised that this module even exists.
 
 Finally, note that Wilson didn't give us a way to run the new code from Chapter 24 as an interactive text editor.
 Try running `undoable.py` and verify nothing happens.
@@ -50,7 +55,20 @@ Before you modify the code, here is a test case you can add to `test_undoable.py
             assert get_screen(app) == ["ab", "cd"]
 
 How did you approach this exercise? 
+we overrode the method in the parent class "Action":
+
+def save(self):
+    return True 
+
+with:
+
+def save(self):
+    return False
+
+When Move.save() gets called, it calls the overrode method, which says to not save it. 
+
 Considering the advice of Ousterhout and others, what do you think about the abstractions that Wilson chose?
+There are a lot of pass through because the ActionApp -> InsertDeleteApp -> HeadlessApp -> App
 
 ## Exercise 2: Line breaks
 
