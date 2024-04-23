@@ -11,8 +11,8 @@ Enter your names here
 
 ## Team Roles for Part 1
 Who will start out as
-* DRIVER: Driver's name
-* NAVIGATOR: Navigator's name
+* DRIVER: Luke Samuels
+* NAVIGATOR: Jack Allard
 
 You will switch halfway through this activity.
 
@@ -21,13 +21,21 @@ You will switch halfway through this activity.
 Write your answers to the questions below.
 
 * What were the main ideas from SDX chapter 24?
+1. Insertion/Deletion can be implemented with the command pattern
+2. Undo/Redo can be represented as a stack of insertion/deletion/cursor move objects that can be parsed through
+
 * What questions did you have about the material in the chapters? What did you find confusing?
+
+1. This approach, where each keystroke creates an object to put in a dynamically allocated vector, seems like
+the most possibly inefficient way to do it. I understand that this is a small project and optimization is not
+a worry, but it seems highly unlikely for this to be representative of any real undo/redo system. Or am I thinking
+of it wrong?
 
 ## Exercise 0: Run the code
 
 First, verify that you can run the test scripts, and that all tests pass.
 
-Next, verify that you can run the base application from Chapter 23:
+Next, verify that you can run the base appl1ication from Chapter 23:
 
     python3 app.py 20
 
