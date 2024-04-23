@@ -18,6 +18,15 @@ def test_insert_undo():
     assert get_screen(app) == ["ab", "cd"]
 # [/example]
 
+def test_no_undo_movement():
+    for key in ["KEY_UP", "KEY_DOWN", "KEY_LEFT", "KEY_RIGHT"]:
+        app = make_fixture(["z", key, "UNDO"])
+        assert get_screen(app) == ["ab", "cd"]
+
+def test_enter_undo():
+    app = make_fixture(["KEY_RIGHT", "ENTER", "UNDO"])
+    assert get_screen(app) == ["ab","cd"]
+
 ### Test runner
 import time
 
@@ -36,6 +45,8 @@ def run_tests():
     print(f"pass {results['pass']}")
     print(f"fail {results['fail']}")
     print(f"error {results['error']}")
+
+
 
 if __name__ == '__main__':
     run_tests()

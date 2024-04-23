@@ -37,3 +37,12 @@ class Buffer:
 
     def _bottom(self):
         return self._top + self._height
+    
+    def insert_newline(self, pos):
+        row, col = pos
+        line = self._lines[row]
+        self._lines[row] = line[:col]
+        self._lines.insert(row+1, line[col:])
+
+    def delete_line(self, row):
+        del self._lines[row]

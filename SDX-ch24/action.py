@@ -1,6 +1,7 @@
 import string
 
 from insert_delete import InsertDeleteApp
+from util import ROW, COL
 
 
 # [Action]
@@ -27,10 +28,16 @@ class Insert(Action):
         self._char = char
 
     def do(self):
-        self._app._buffer.insert(self._pos, self._char)
+        if self._char == '\n':
+            self._app._buffer.insert_newline(self._pos)
+        else:
+            self._app._buffer.insert(self._pos, self._char)
 
     def undo(self):
-        self._app._buffer.delete(self._pos)
+        if self._char == '\n':
+            self._app._buffer.delete_line(self._pos[ROW])
+        else:
+            self._app._buffer.delete(self._pos)
 # [/Insert]
 
     def __str__(self):
@@ -107,7 +114,8 @@ class ActionApp(InsertDeleteApp):
         if not hasattr(self, name):
             return
         action = getattr(self, name)(key)
-        self._history.append(action)
+        if not isinstance(action, Move):
+            self._history.append(action)
         action.do()
         self._add_log(key)
     # [/interact]
