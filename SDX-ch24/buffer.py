@@ -19,6 +19,16 @@ class Buffer:
         assert 0 <= pos[ROW] < len(self._lines)
         assert 0 <= pos[COL] < len(self._lines[ROW])
         return self._lines[pos[ROW]][pos[COL]]
+    
+    def insert(self, pos, char):
+        if char == '\n':
+            row, col = pos
+            line = self._lines[row]
+            self._lines[row] = line[:col] + char
+            self._lines.insert(row + 1, line[col:])
+        else:
+            row, col = pos
+            self._lines[row] = self._lines[row][:col] + char + self._lines[row][col:]
 
     def set_height(self, height):
         self._height = height
@@ -37,3 +47,4 @@ class Buffer:
 
     def _bottom(self):
         return self._top + self._height
+
