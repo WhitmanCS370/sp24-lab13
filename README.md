@@ -37,14 +37,64 @@ Finally, note that Wilson didn't give us a way to run the new code from Chapter 
 Try running `undoable.py` and verify nothing happens.
 We'll address this in a later exercise.
 
-## Exercise n: A real text editor
+## Exercise 1: Forgetting moves
+
+Most editors do not save cursor movements in their undo history. 
+Modify the code in `action.py` so that movement operations are not saved.
+
+Before you modify the code, here is a test case you can add to `test_undoable.py`. It should initially fail.
+
+    def test_no_undo_movement():
+        for key in ["KEY_UP", "KEY_DOWN", "KEY_LEFT", "KEY_RIGHT"]:
+            app = make_fixture(["z", key, "UNDO"])
+            assert get_screen(app) == ["ab", "cd"]
+
+How did you approach this exercise? 
+Considering the advice of Ousterhout and others, what do you think about the abstractions that Wilson chose?
+
+## Exercise 2: Line breaks
+
+Modify the code in `action.py` and `buffer.py` so that pressing the Enter key inserts a new line or breaks the current line in two.
+What information do you have to store to make this operation undoable?
+
+Here is a test case to add to `test_action.py`:
+
+    def test_enter():
+        app = make_fixture(["KEY_RIGHT", "ENTER"])
+        assert get_screen(app) == ["a_","b_"]
+
+And here is a test case to add to `test_undoable.py`:
+
+    def test_enter_undo():
+        app = make_fixture(["KEY_RIGHT", "ENTER", "UNDO"])
+        assert get_screen(app) == ["ab","cd"]
+
+
+How did you approach this exercise? 
+Considering the advice of Ousterhout and others, what do you think about the abstractions that Wilson chose?
+
+## Exercise 3: Redoing operations
+
+Implement a “redo” command that re-executes an operation that has been undone. How does redo differ from undoing an undo? Does it make sense to redo an action that wasn’t done?
+
+Here's an example test case:
+
+    def test_undo_redo():
+        app = make_fixture(["KEY_RIGHT", "z", "UNDO", "REDO"])
+        assert get_screen(app) == ["az","cd"]
+
+How did you approach this exercise? 
+Considering the advice of Ousterhout and others, what do you think about the abstractions that Wilson chose?
+
+## Exercise 4: A real text editor
 
 Create a new main module `main.py`.  It should take the name of a file and open that file for editing using the `UndoableApp` class.
 
 To run the app with a real screen in the terminal, you will need to make the `InsertDeleteApp` class inherit from `App` instead of `HeadlessApp`.
-Do this now and resolve any resulting bugs. Note you will no longer be able to run the automated tests that use headless mode.
+Do this now and resolve any resulting errors. 
+Note that you will no longer be able to run the automated tests that use headless mode, which is why I put this exercise last.
 
-Then, add a handler for CTRL-S to save the file.
+Using your knowledge of design patterns and principles, propose a different approach for introducing headless mode
+that would allow you to both use the app and run automated tests. What's your approach?
 
-Using your knowledge of design principles and patterns, propose a different approach for introducing headless mode
-that would allow you to both use the app and run automated tests.
+What else do you need to do to make this text editor work as a useful interactive application? 
