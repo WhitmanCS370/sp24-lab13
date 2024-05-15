@@ -7,12 +7,13 @@ Organization:
 * SDX-ch24: The code files for the _SDX Ch. 24_ activity, as downloaded from the book website. The test scripts have been modified to include the test runner from chapter 6.
 
 ## Team Members for Part 1
-Enter your names here
+Oliver, Uli
+
 
 ## Team Roles for Part 1
 Who will start out as
-* DRIVER: Driver's name
-* NAVIGATOR: Navigator's name
+* DRIVER: Oliver    
+* NAVIGATOR: Uli
 
 You will switch halfway through this activity.
 
@@ -21,7 +22,12 @@ You will switch halfway through this activity.
 Write your answers to the questions below.
 
 * What were the main ideas from SDX chapter 24?
+
+the main ideas of the chapter were logging actions and headless applications
+
 * What questions did you have about the material in the chapters? What did you find confusing?
+
+No questions
 
 ## Exercise 0: Run the code
 
@@ -36,6 +42,8 @@ Use CTRL-X to quit.
 Finally, note that Wilson didn't give us a way to run the new code from Chapter 24 as an interactive text editor.
 Try running `undoable.py` and verify nothing happens.
 We'll address this in a later exercise.
+
+verified 👍
 
 ## Exercise 1: Forgetting moves
 

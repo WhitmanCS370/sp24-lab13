@@ -75,6 +75,25 @@ class Move(Action):
         return f"Move('{self._direction}', {self._old}, {self._new})"
 
 
+class Enter(Action):
+    def __init__(self, app, pos, char):
+        super().__init__(app)
+        self._pos = pos
+        self._char = char
+
+    def do(self):
+        restofline = self._app._buffer._lines[self._pos[0]][self._pos[1]:]
+        self._app._buffer._lines[self._pos[0]+1] = restofline
+        self._app._buffer.insert(self._pos, self._char)
+
+    def undo(self):
+        self._app._buffer.delete(self._pos)
+        self._app._cursor.up()
+
+    def __str__(self):
+        return f"Enter({self._pos}), '{self._char}')"
+
+
 class Exit(Action):
     def do(self):
         self._app._running = False
@@ -107,6 +126,7 @@ class ActionApp(InsertDeleteApp):
         if not hasattr(self, name):
             return
         action = getattr(self, name)(key)
+        print(action)
         self._history.append(action)
         action.do()
         self._add_log(key)
@@ -125,6 +145,9 @@ class ActionApp(InsertDeleteApp):
     def _do_KEY_UP(self, key):
         return Move(self, "up")
     # [/actions]
+
+    def _do_ENTER(self, key):
+        return Enter(self, self._cursor.pos(), '_')
 
     def _do_KEY_DOWN(self, key):
         return Move(self, "down")
